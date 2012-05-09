@@ -12,6 +12,13 @@
 #define DIMENSION 100
 #endif
 
+#ifndef TMIN
+#define TMIN 0.4
+#endif
+#ifndef TMAX
+#define TMAX 1.8
+#endif
+
 #ifdef PREFILL
 #define SUFFIX "_prefill"
 #else

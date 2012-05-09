@@ -13,7 +13,7 @@ void keyboard(unsigned char, int, int);
 void Idle();
 void Resize(int, int);
 
-Simulation sim(DIMENSION, 0.4, 2, SEED);
+Simulation sim(DIMENSION, MIN, TMAX, SEED);
 
 /////////////// Main Program ///////////////////////////
 int main(int argc, char* argv[])
