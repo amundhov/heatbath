@@ -13,7 +13,7 @@ void keyboard(unsigned char, int, int);
 void Idle();
 void Resize(int, int);
 
-Simulation sim(DIMENSION, 0.4, 2);
+Simulation sim(DIMENSION, 0.4, 2, SEED);
 
 /////////////// Main Program ///////////////////////////
 int main(int argc, char* argv[])
@@ -52,8 +52,6 @@ void Render()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    sim.evolve(ITERATIONS_PER_SAMPLE);
-    sim.sample();
 
 	glBegin(GL_POINTS);
     for (int i=0; i<DIMENSION; i++ ) {
@@ -84,6 +82,8 @@ void keyboard(unsigned char key, int x, int y)
 
 void Idle()
 {
+    sim.evolve(ITERATIONS_PER_SAMPLE);
+    sim.sample();
     glutPostRedisplay();
 }
 
