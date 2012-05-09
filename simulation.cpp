@@ -10,7 +10,7 @@ Simulation::Simulation(int systemLength, double Tmin, double Tmax, int seed):
 
     // Open OUTFILE for writing.
 #ifdef SAMPLE_TO_FILE
-    sprintf(filename,"out_L_%i_Tmin_%f_Tmax_%f%s.dat", DIMENSION, Tmin, Tmax, SUFFIX);
+    sprintf(filename,"Q%i_L_%i_Tmin_%f_Tmax_%f%s.dat", Q, DIMENSION, Tmin, Tmax, SUFFIX);
     filedescriptor = fopen(filename, "w");
 #endif
 
