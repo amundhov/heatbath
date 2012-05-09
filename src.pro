@@ -1,6 +1,8 @@
 TEMPLATE = app
-CONFIG += console
+CONFIG += console debug
 CONFIG -= qt
+
+QMAKE_CXXFLAGS += -g3
 
 SOURCES += main.cpp \
     simulation.cpp
