@@ -13,28 +13,32 @@ typedef struct { unsigned int up;
 typedef struct { double I;
                  double Wsquared;
                  unsigned long int iteration;
-} sample;
+} Sample;
 
 class Simulation
 {
 public:
     Simulation(int length, double Tmin, double Tmax, int seed=0);
+    ~Simulation();
 
     void evolve(int numberOfIterations);
     void sample();   // Writes sample to OUTFILE
     void truncate(); // Truncates OUTFILE
 
-    unsigned char *lattice1;
-    unsigned char *lattice2;
-    NodeIndex *indices;
-    double *temperature;
+    unsigned char lattice1[DIMENSION*DIMENSION];
+    unsigned char lattice2[DIMENSION*DIMENSION];
+    unsigned char difference[DIMENSION*DIMENSION];
+    NodeIndex indices[DIMENSION*DIMENSION];
+    double temperature[DIMENSION];
+    unsigned long int interface[DIMENSION];
 
 private:
-    void heatBath(unsigned char *lattice);
+    void heatBath(unsigned char *lattice, unsigned long row, unsigned long column, double r);
     gsl_rng *rng;
     int systemLength;
     FILE *filedescriptor;
     char filename[100];
+    unsigned long long int iteration;
 
 };
 

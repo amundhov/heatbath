@@ -5,8 +5,6 @@
 #include <GL/glut.h>
 #include <iostream>
 
-#define PRE_ITERATIONS 0
-#define ITERATIONS_PER_FRAME 50000
 
 using namespace std;
 
@@ -15,7 +13,7 @@ void keyboard(unsigned char, int, int);
 void Idle();
 void Resize(int, int);
 
-Simulation sim(dimension, 3, 0.1, 1.4);
+Simulation sim(DIMENSION, 0.4, 2);
 
 /////////////// Main Program ///////////////////////////
 int main(int argc, char* argv[])
@@ -35,7 +33,7 @@ int main(int argc, char* argv[])
 
     glShadeModel(GL_SMOOTH);
     glClearColor (0.0, 0.0, 0.0, 0.0);
-	glPointSize(250.0/(float)dimension);
+    glPointSize(300.0/(float)DIMENSION);
 
     glutDisplayFunc(Render);
     glutReshapeFunc(Resize);
@@ -46,7 +44,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-const unsigned char colours[3][3] = {{ 199, 67, 60}, {168, 186, 182}, {159, 67, 149}};
+const unsigned char colours[4][3] = {{168, 186, 182}, { 199, 67, 60}, {159, 67, 149}, {255,255,255}};
 
 void Render()
 {
@@ -54,18 +52,22 @@ void Render()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    sim.evolve(ITERATIONS_PER_FRAME);
+    sim.evolve(ITERATIONS_PER_SAMPLE);
     sim.sample();
 
 	glBegin(GL_POINTS);
-	for (int i=0; i<dimension; i++ ) {
-        for (int j=0; j<dimension; j++ ) {
-            int spin = sim.lattice1[i*dimension+j];
-            glColor3ubv(colours[spin]);
+    for (int i=0; i<DIMENSION; i++ ) {
+        for (int j=0; j<DIMENSION; j++ ) {
+            unsigned char diff = sim.difference[i*DIMENSION+j];
+            glColor3ubv(colours[diff]);
             glVertex2i(i,j);
         }
-	}
-	glEnd();
+    }
+    glColor3ub(0,0,0);
+    for (int i=0; i<DIMENSION; i++ ) {
+        glVertex2i(i,sim.interface[i]);
+    }
+    glEnd();
 
 
     glutSwapBuffers();
@@ -97,5 +99,5 @@ void Resize(int w, int h)
     glLoadIdentity();
 
     //         L	   R 	  B 	T	 N	   F
-    glOrtho(-1,dimension,-1,dimension,-1,1);
+    glOrtho(-1,DIMENSION,-1,DIMENSION,-1,1);
 }
