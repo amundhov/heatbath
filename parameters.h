@@ -2,14 +2,14 @@
 #define PARAMETERS_H
 
 #define window_dimension 540
-#define ITERATIONS_PER_SAMPLE 10000000
+#define ITERATIONS_PER_SAMPLE 1000000
 #define PRE_ITERATIONS 0
 
 #ifndef Q
-#define Q 2
+#define Q 3
 #endif
 #ifndef DIMENSION
-#define DIMENSION 300
+#define DIMENSION 100
 #endif
 
 #ifdef PREFILL
@@ -17,6 +17,8 @@
 #else
 #define SUFFIX ""
 #endif
+
+#define SEED 0
 
 #define SAMPLE_TO_FILE
 
