@@ -13,8 +13,12 @@
 #define TMAX 1.8
 #endif
 
+#ifndef SEED
+#define SEED 0
+#endif
+
 //char command='\0';
-Simulation sim(DIMENSION, TMIN, TMAX);
+Simulation sim(DIMENSION, TMIN, TMAX, SEED);
 volatile sig_atomic_t abortRun =  0;
 
 void termination_handler(int signum)
