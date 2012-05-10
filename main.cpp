@@ -13,7 +13,7 @@ void keyboard(unsigned char, int, int);
 void Idle();
 void Resize(int, int);
 
-Simulation sim(DIMENSION, MIN, TMAX, SEED);
+Simulation sim(DIMENSION, TMIN, TMAX, SEED);
 
 /////////////// Main Program ///////////////////////////
 int main(int argc, char* argv[])
@@ -51,7 +51,6 @@ void Render()
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
 
 	glBegin(GL_POINTS);
     for (int i=0; i<DIMENSION; i++ ) {
