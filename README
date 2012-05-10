@@ -1,0 +1,22 @@
+parameters.h
+ - Simulation parameters needed by main.cpp and compute.cpp
+
+simulation.cpp
+ - Definitin of of simulation object doing the actual work.
+
+compute.cpp
+ - Link with this to make a stand-alone exectuable which samples to file and
+   shuts down cleanly when killed.
+
+g++ -o compute compute.cpp simulation.cpp -lgsl -lgslcblas
+
+main.cpp
+ - Main routine for visualizing the evolution of the interface.
+
+g++ -o visualize main.cpp simulation.cpp -lgsl -lgslcblas -lGL -lglut
+
+aggregate.cpp
+ - Routine for doing arithmetic mean of simulation files produced by
+   compute.cpp and main.cpp
+
+g++ -o aggregate aggregate.cpp -lm
